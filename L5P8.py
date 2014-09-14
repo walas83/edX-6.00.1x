@@ -12,7 +12,8 @@ def isIn(char, aStr):
     elif len(aStr) == 1:
         return (aStr == char)
     else:
-        c = aStr[int(len(aStr)/2): int(len(aStr)/2+1)]
+        #c = aStr[int(len(aStr)/2): int(len(aStr)/2+1)]
+        c = aStr[int(len(aStr)/2)]
         if c == char:
             return True
         elif c > char:
