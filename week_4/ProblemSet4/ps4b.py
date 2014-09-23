@@ -65,7 +65,24 @@ def compPlayHand(hand, wordList, n):
     wordList: list (string)
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    totalScore = 0
+    while calculateHandlen(hand) > 0:
+        
+        print 'Current Hand: ',
+        displayHand(hand)
+        
+        word = compChooseWord(hand, wordList, n)
+        
+        if word:
+            wordScore = getWordScore(word, n)
+            totalScore += wordScore
+            print '"' + word + '" earned ' + str(wordScore) + ' points. Total: ' + str(totalScore) + ' points' 
+            hand = updateHand(hand, word)
+        else:
+            break
+        print
+        
+    print 'Total score: ' + str(totalScore) + ' points.'    
     
 #
 # Problem #8: Playing a game
@@ -95,15 +112,35 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this when you code this function
-
-        
+    n = HAND_SIZE
+    hand = {}
+    while True:
+        command = str(raw_input('Enter n to deal a new hand, r to replay the last hand, or e to end game: '))
+        if command == 'n' or command == 'r':
+            if command == 'n':
+                hand = dealHand(n)
+            elif len(hand) == 0:
+                print 'You have not played a hand yet. Please play a new hand first!'
+                continue
+            while True:
+                secCommand = str(raw_input('Enter u to have yourself play, c to have the computer play: '))
+                if secCommand == 'u':
+                    playHand(hand, wordList, n)
+                    break
+                elif secCommand == 'c':
+                    compPlayHand(hand, wordList, n)
+                    break
+                else:
+                    print 'Invalid command.'
+        elif command == 'e':
+            break
+        else:
+            print 'Invalid command.'
+    
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     wordList = loadWords()
     playGame(wordList)
-print 'aaaaaa'
-print compChooseWord({'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}, wordList, 6)
+
