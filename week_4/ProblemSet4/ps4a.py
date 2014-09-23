@@ -20,7 +20,7 @@ SCRABBLE_LETTER_VALUES = {
 # Helper code
 # (you don't need to understand this helper code)
 
-WORDLIST_FILENAME = "words.txt"
+WORDLIST_FILENAME = "/home/mw5044/workspace/edX-6.00.1x/week_4/ProblemSet4/words.txt"
 
 def loadWords():
     """
@@ -76,10 +76,15 @@ def getWordScore(word, n):
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     returns: int >= 0
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    score = 0
+    for char in word:
+        score += SCRABBLE_LETTER_VALUES[char]
+    score *= len(word)
+    
+    if len(word) == n:
+        score += 50
 
-
-
+    return score
 #
 # Problem #2: Make sure you understand how this function works and what it does!
 #
