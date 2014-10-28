@@ -29,9 +29,13 @@ def insert(atMe, newFrob):
     if newFrob.myName() > atMe.myName():
         if atMe.getAfter():
             print 'ma:  ' + atMe.getAfter().myName()
-            if newFrob.myName() > atMe.getAfter().myName():
+            afterMe = atMe.getAfter(
+            if newFrob.myName() > afterMe.myName():
                 insert(atMe.getAfter(), newFrob)
                 print 'jest'
+            else:
+                newFrob.setBefore(atMe)
+                newFrob.setAfter(atMe)
         else: 
             newFrob.setBefore(atMe)
             atMe.setAfter(newFrob)
